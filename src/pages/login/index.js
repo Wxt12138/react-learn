@@ -1,11 +1,24 @@
-import { Form, Input, Button, Checkbox } from 'antd';
-import { useNavigate } from 'react-router'
+import { Form, Input, Button, message } from 'antd';
+import { MD5 } from 'crypto-js';
+// import { useNavigate } from 'react-router'
+import { post } from '@/utils/http'
+import { UserToken } from '@/utils/cache'
 
 const Login = () => {
-    let navigate = useNavigate();
+    // let navigate = useNavigate();
     const onFinish = (values) => {
         console.log('Success:', values);
-        navigate('/home')
+        let { password } = values;
+        values.password = String(MD5(password)).toUpperCase();
+        post('/login', values).then((res) => {
+            console.log(res);
+            if (res.code == 200) {
+                UserToken.set('__user_token__', res.token)
+            } else {
+                message.error(res.message);
+            }
+        })
+        // navigate('/home')
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -13,8 +26,25 @@ const Login = () => {
     };
 
     return (
-        <div >
-            <div>
+        <div style={{
+            background: "url(" + require('../../assets/banner.gif') + ")",
+            width: '100%',
+            height: '100%',
+            // background: 'red'
+        }}>
+            <div
+                style={{
+                    position: "absolute",
+                    left: '50%',
+                    top: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '500px',
+                    height: '200px',
+                    background: 'rgb(198 238 245 / 51%)',
+                    borderRadius: '5px',
+                    padding: '30px 30px 10px 30px'
+                }}
+            >
                 <Form
                     name="basic"
                     labelCol={{
@@ -59,23 +89,12 @@ const Login = () => {
                     </Form.Item>
 
                     <Form.Item
-                        name="remember"
-                        valuePropName="checked"
                         wrapperCol={{
                             offset: 4,
                             span: 16,
                         }}
                     >
-                        <Checkbox>Remember me</Checkbox>
-                    </Form.Item>
-
-                    <Form.Item
-                        wrapperCol={{
-                            offset: 4,
-                            span: 16,
-                        }}
-                    >
-                        <Button type="primary" htmlType="submit">
+                        <Button type="primary" htmlType="submit" block>
                             登录
                         </Button>
                     </Form.Item>
