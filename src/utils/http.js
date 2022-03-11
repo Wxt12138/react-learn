@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { message } from 'antd';
 import baseUrl from '@/config/url.js'
+import { UserToken } from './cache'
+// import { useNavigate } from 'react-router'
 
-console.log(baseUrl, 789)
-
+// let navigate = useNavigate();
 
 var instance = axios.create({
     // baseURL: process.env.NODE_ENV,
@@ -18,7 +19,8 @@ var instance = axios.create({
 
 instance.interceptors.request.use(
     http => {
-        // http.headers.Authorization = UserToken.get() || '';
+        console.log(UserToken.get(), 458);
+        http.headers.Authorization = UserToken.get() || '';
         // var params = http.data || {};
         // http.headers['X-Request-Sign'] = sign(params);
         http.headers['X-Request-Timestamp'] = (new Date()).getTime() / 1000;
@@ -36,7 +38,8 @@ instance.interceptors.response.use(
     res => {
         if ((res || {}).data.code === 401) {
             // clean();
-            window.location.reload();
+            // window.location.reload();
+            // navigate('/login');
             return;
         }
         if ((res || {}).data.code === 403) {

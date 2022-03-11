@@ -1,19 +1,20 @@
 import { Form, Input, Button, message } from 'antd';
 import { MD5 } from 'crypto-js';
-// import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
 import { post } from '@/utils/http'
 import { UserToken } from '@/utils/cache'
 
 const Login = () => {
-    // let navigate = useNavigate();
+    let navigate = useNavigate();
     const onFinish = (values) => {
         console.log('Success:', values);
         let { password } = values;
         values.password = String(MD5(password)).toUpperCase();
         post('/login', values).then((res) => {
-            console.log(res);
             if (res.code == 200) {
-                UserToken.set('__user_token__', res.token)
+                UserToken.set(res.data.token);
+                message.success('成功登录');
+                navigate('/home');
             } else {
                 message.error(res.message);
             }

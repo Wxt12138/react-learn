@@ -40,10 +40,10 @@ class Siders extends Component {
                     onClick={this._handleclick}
                 >
                     <Menu.Item key="nav" icon={<UserOutlined />}>
-                        nav 1
+                        首页
                     </Menu.Item>
                     <Menu.Item key="22" icon={<VideoCameraOutlined />}>
-                        nav 2
+                        <Link to="/img">img</Link>
                     </Menu.Item>
                     <Menu.Item key="home" icon={<UploadOutlined />}>
                         <Link to="/home">about</Link>
