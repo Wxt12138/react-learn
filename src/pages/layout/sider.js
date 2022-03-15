@@ -36,17 +36,17 @@ class Siders extends Component {
                 }}
                 trigger={null} collapsible collapsed={this.props.collapsed}>
                 <div className="logo" />
-                <Menu theme="dark" mode="inline" defaultSelectedKeys={['nav']}
+                <Menu theme="dark" mode="inline" defaultSelectedKeys={['home']}
                     onClick={this._handleclick}
                 >
-                    <Menu.Item key="nav" icon={<UserOutlined />}>
-                        首页
+                    <Menu.Item key="home" icon={<UserOutlined />}>
+                        <Link to="/home">首页</Link>
                     </Menu.Item>
-                    <Menu.Item key="22" icon={<VideoCameraOutlined />}>
-                        <Link to="/img">img</Link>
+                    <Menu.Item key="img" icon={<VideoCameraOutlined />}>
+                        <Link to="/img">瀑布流</Link>
                     </Menu.Item>
-                    <Menu.Item key="home" icon={<UploadOutlined />}>
-                        <Link to="/home">about</Link>
+                    <Menu.Item key="about" icon={<UploadOutlined />}>
+                        about
                     </Menu.Item>
                     <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
                         <Menu.Item key="1">Option 1</Menu.Item>
