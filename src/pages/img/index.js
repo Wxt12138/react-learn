@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Masonry from 'masonry-layout';
+import { post } from '@/utils/http'
 import './index.scss'
 export default function Img() {
     const [nums, setNums] = useState(3);
@@ -8,7 +9,6 @@ export default function Img() {
         msnry.layout();
         document.getElementsByTagName('main')[0].onscroll = function () {
             if (nums >= 20) return;
-            console.log(document.getElementsByTagName('main')[0])
             let scrollTop = document.getElementsByTagName('main')[0].scrollTop;
             let windowHeight = document.getElementsByTagName('main')[0].clientHeight;
             let scrollHeight = document.querySelector('.grid').clientHeight;
@@ -18,14 +18,18 @@ export default function Img() {
             }
         }
         return () => {
-            console.log(123)
             document.getElementsByTagName('main')[0].onscroll = null;
         }
     }, [nums])
+
     let item = [];
     for (let i = 0; i < nums; i++) {
         item.push(i)
     }
+    // 请求事件
+    useEffect(() => {
+        post('/home')
+    }, [])
 
     return (
         <div >

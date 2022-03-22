@@ -23,6 +23,7 @@ export default class Layouts extends Component {
     };
 
     render() {
+        console.log(this.props.history)
         return (
             <Layout id="components-layout-demo-custom-trigger">
                 <Layout>

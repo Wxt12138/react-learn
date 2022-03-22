@@ -2,20 +2,24 @@ import { Form, Input, Button, message } from 'antd';
 import { MD5 } from 'crypto-js';
 import { useNavigate } from 'react-router'
 import { post } from '@/utils/http'
-import { UserToken } from '@/utils/cache'
 import ParticlesBg from 'particles-bg'
+import store from '@/store/mainStore'
 
 const Login = () => {
     let navigate = useNavigate();
     const onFinish = (values) => {
-        console.log('Success:', values);
         let { password } = values;
         values.password = String(MD5(password)).toUpperCase();
         post('/login', values).then((res) => {
             if (res.code == 200) {
-                UserToken.set(res.data.token);
-                message.success('成功登录');
-                navigate('/home');
+                store.dispatch({
+                    type: 'logIn',
+                    token: res.data.token
+                })
+                message.success('成功登录', [1], () => {
+                    navigate('/home');
+                });
+
             } else {
                 message.error(res.message);
             }

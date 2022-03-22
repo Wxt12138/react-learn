@@ -2,9 +2,7 @@ import axios from 'axios';
 import { message } from 'antd';
 import baseUrl from '@/config/url.js'
 import { UserToken } from './cache'
-// import { useNavigate } from 'react-router'
-
-// let navigate = useNavigate();
+import store from '@/store/mainStore'
 
 var instance = axios.create({
     // baseURL: process.env.NODE_ENV,
@@ -19,7 +17,6 @@ var instance = axios.create({
 
 instance.interceptors.request.use(
     http => {
-        console.log(UserToken.get(), 458);
         http.headers.Authorization = UserToken.get() || '';
         // var params = http.data || {};
         // http.headers['X-Request-Sign'] = sign(params);
@@ -39,7 +36,11 @@ instance.interceptors.response.use(
         if ((res || {}).data.code === 401) {
             // clean();
             // window.location.reload();
-            // navigate('/login');
+
+            store.dispatch({
+                type: 'logOut',
+            })
+            window.location.href = '#/login';
             return;
         }
         if ((res || {}).data.code === 403) {
@@ -52,12 +53,20 @@ instance.interceptors.response.use(
         return res;
     },
     error => {
-        if ((error.response || {}).data.code === 401) {
+        console.log(error.response, 404)
+        if ((error.response || {}).status === 401) {
             // clean();
             window.location.reload();
             return Promise.reject(error);
         }
-        if ((error.response || {}).data.code === 403) {
+        if ((error.response || {}).status === 404) {
+
+            store.dispatch({
+                type: 'logOut',
+            })
+            return Promise.reject(error);
+        }
+        if ((error.response || {}).status === 403) {
             message.error({
                 title: '警告',
                 message: "没有权限"
