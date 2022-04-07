@@ -55,11 +55,13 @@ const Login = (props) => {
                         span: 16,
                     }}
                     initialValues={{
-                        remember: true,
+                        username: "admin",
+                        password: "123456"
                     }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
                     autoComplete="off"
+
                 >
                     <Form.Item
                         label="账号"
