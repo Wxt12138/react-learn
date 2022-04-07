@@ -12,7 +12,7 @@ import { UserToken } from '../utils/cache'
 const Rout = () => {
     const [islogin, setIslogin] = useState(UserToken.get() ? true : false);
     store.subscribe(() => {
-        console.log("订阅")
+        console.log("订阅", setIslogin(store.getState().token))
         setIslogin(store.getState().token ? true : false)
     })
 

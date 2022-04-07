@@ -23,16 +23,16 @@ const menu = (
     </Menu>
 );
 
-class head extends Components {
+export default class head extends Components {
+    render() {
+        <div>
+            <Dropdown overlay={menu}>
+                <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                    Hover me <DownOutlined />
+                </a>
+            </Dropdown>
+        </div>
 
+    }
 }
 
-
-ReactDOM.render(
-    <Dropdown overlay={menu}>
-        <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-            Hover me <DownOutlined />
-        </a>
-    </Dropdown>,
-    mountNode,
-);
