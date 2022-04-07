@@ -61,9 +61,9 @@ instance.interceptors.response.use(
         }
         if ((error.response || {}).status === 404) {
 
-            store.dispatch({
-                type: 'logOut',
-            })
+            // store.dispatch({
+            //     type: 'logOut',
+            // })
             return Promise.reject(error);
         }
         if ((error.response || {}).status === 403) {

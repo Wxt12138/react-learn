@@ -3,8 +3,8 @@ import { Layout, Menu } from 'antd';
 import { Link, useParams } from "react-router-dom"
 import {
     UserOutlined,
-    VideoCameraOutlined,
-    UploadOutlined,
+    DatabaseOutlined,
+    TableOutlined,
     MailOutlined
 } from '@ant-design/icons';
 
@@ -23,7 +23,7 @@ function Siders(props) {
 
     let ss = () => {
         return (
-            <Menu.Item key="1513" icon={<VideoCameraOutlined />}>
+            <Menu.Item key="1513" icon={<TableOutlined />}>
                 nav 2564
             </Menu.Item>
         )
@@ -47,11 +47,11 @@ function Siders(props) {
                 <Menu.Item key="home" icon={<UserOutlined />}>
                     <Link to="/home">首页</Link>
                 </Menu.Item>
-                <Menu.Item key="img" icon={<VideoCameraOutlined />}>
+                <Menu.Item key="img" icon={<DatabaseOutlined />}>
                     <Link to="/img">瀑布流</Link>
                 </Menu.Item>
-                <Menu.Item key="about" icon={<UploadOutlined />}>
-                    about
+                <Menu.Item key="table" icon={<TableOutlined />}>
+                    <Link to="/table">表格</Link>
                 </Menu.Item>
                 <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
                     <Menu.Item key="1">Option 1</Menu.Item>

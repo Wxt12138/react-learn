@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Divider } from 'antd';
 import Masonry from 'masonry-layout';
 import { post } from '@/utils/http'
 import './index.scss'
@@ -33,7 +34,7 @@ export default function Img() {
 
     return (
         <div >
-            <div>{nums}</div>
+            <Divider orientation="left">瀑布流的应用</Divider>
             <div className="grid">
                 <div className="grid-item"></div>
                 <div className="grid-item"></div>

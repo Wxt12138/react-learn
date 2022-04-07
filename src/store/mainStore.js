@@ -11,6 +11,7 @@ const reducer = (prevState = {
             UserToken.remove()
             return newState;
         case "logIn":
+            console.log("lo")
             newState.token = action.token;
             UserToken.set(action.token)
             return newState;
